@@ -1,0 +1,4 @@
+1) Take the output of env in your terminal and work out why each item is there and what it might be used for. You may want to use man bash, or google to figure it out. You could try resetting it to see what happens
+
+
+2) Find out what the items in BASH_VERSINFO mean..
