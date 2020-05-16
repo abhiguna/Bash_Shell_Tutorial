@@ -204,6 +204,85 @@ cat file3
 # line1
 # line2
 
+#                                5. Shell Scripts and Startups
+
+# Definition: A shell script is a collection of shell commands can be run at once.
+
+# Sample Program:
+
+echo '#!/bin/bash' > simple_script
+echo 'I am a simple script' >> simple_script
+./simple_script # Output: Error: Permission Denied
+
+# Any command with '#!......" is known as the "shebang" or the "hashbang"
+# When a compiler sees such a program it knows that such a program must be run with the help of an interpreter or a shell.
+
+./simple_script #---> Only works if simple_script is an executable
+
+# Hoever, you can change the file access using the 'chmod' command
+
+chmod +x simple_script # Changes the file to be an executable so that any member can access it
+./simple_script # This atleast can access the file
+
+# *PATH Variable
+
+# The PATH variable is a variable that holds all the directories that the bash shell can search in.
+# And the PATH variable is set by Shell Startup Scripts
+
+# Sample Output:
+
+echo $PATH
+# Output:
+#/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/Library/Apple/usr/bin
+
+# You can slightly alter the PATH variable as follows
+PATH={$PATH}:. # Sets the current working directory as a Path
+
+# *Startup Explained
+
+# Which Startup Scripts run depends on the context in which they operate
+# Different shells have different Contexts which can be observed by directed graphs.
+
+# At each point the context-hierarchy determines whether you are operating on an interactive or a non-interactive shell.
+
+# Interactive means that the startup scripts takes user input from the terminal.
+# Non-interactive means that the startp script does not take input files from the terminal.
+
+# The path that the context hierarchy takes is as follows:
+
+# local/remote shell -> login/non-login -> interactive-shell?
+# If the file that you want to run is not part of this hierarchy, it is simply ignored.
+
+# * Source Builtin
+
+# 'source' is a builtin that can be used to run scripts at the local context.
+# i.e. it makes your shell run scripts in your current directory.
+
+# Sample Program:
+MYVAR=HELLO
+echo 'echo $MYVAR' > simple_echo
+chmod +x simple_echo
+./simple_echo
+source simple_echo
+
+# Suffix: Most Shell Scripts have a .sh suffix attached to the end, but it is not necessary.
+# The OS does not CARE about the suffix.
+
+# *******AVOIDING STARTUP SCRIPTS*********
+
+# Startup Scripts can be avoided by using the following command
+
+env -i bash --noprofile --norc
+
+# -i flag: Removes all the env variables when the bash command is run
+# --noprofile flag tells bash not to source the system-wide bash startup files.
+# --norc tells bash not to source the personal ones present in your home folder.
+
+
+
+
+
+
 
 
 
