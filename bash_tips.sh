@@ -280,6 +280,52 @@ env -i bash --noprofile --norc
 
 
 
+#---------------------------6 Command Substiution------------------------
+
+# Two ways of command substitution:
+
+# 1. Backticks Method
+echo "My hostname is: `hostname`"
+
+# 2. Dollar Bracket Method
+echo "My hostname is $(hostname)"
+
+# Sample Program:
+# Create a directory named tmop and create empty files with the same names as the ones in the parent directory. Once done, remove the file directory itself.
+
+# Version 1 -- Dollar Bracket Method
+mkdir tmp
+cd tmp
+$(touch $(ls ..)) # Exemplifies nesting
+cd -
+rm -rf tmp
+
+# Version 2 -- Backtick Method
+# Hint: You must use a back slash to escape the nesting of commands
+mkdir tmp
+cd tmp
+touch \`ls ..\``
+cd -
+rm -rf tmp
+
+#-------------------------7 Bash Tests--------------------------------
+# Tests are the most fundamental part of Bash Scripting.
+# Conditional statements must be put in [ ]
+
+[ 1 = 0 ]   # Test that should fail
+echo $?     # Non-zero output means 'un-true'
+[ 1 = 1 ]   # Test that should succeed
+echo $?     # Zero output means 'true'
+
+echo $? # Tells the result of the last executed statement
+# Returns 0 if true. Otherwise, simply returns 1
+
+
+
+
+
+
+
 
 
 
